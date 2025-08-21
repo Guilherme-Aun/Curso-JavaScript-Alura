@@ -80,4 +80,24 @@ getSaveButton.addEventListener("click", (event) => {
   itemTime.innerText = completedDate;
 
   ListItem.appendChild(itemTime);
+
+  verifyEmptyList();
 });
+
+// When you use an queySelector you are gettin data from class
+// for this you need place and . before de class name
+const emptyListMessage = document.querySelector(".message-empty-list");
+
+// Function thats verify if ListItem is empty
+// if are empty add emptyList message
+// if not remove emptyList message
+function verifyEmptyList() {
+  const itemsList = shoppingList.querySelectorAll("li");
+  if (itemsList.length === 0) {
+    emptyListMessage.style.display = "block";
+  } else {
+    emptyListMessage.style.display = "none";
+  }
+}
+
+verifyEmptyList();
