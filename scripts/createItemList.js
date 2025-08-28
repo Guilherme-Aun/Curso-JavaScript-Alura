@@ -1,32 +1,17 @@
 // get input item in text field from HTML
 const getInputData = document.getElementById("input-item");
 
-// get shopping list from HTML
-// <ul id="lista-de-compras">
-//  <li>
-//  </li>
-// </ul>
-const shoppingList = document.getElementById("lista-de-compras");
-
-// get save button from HTML
-const getSaveButton = document.getElementById("adicionar-item");
-
 // counter that will be used to create unique IDs for checkboxes
 let counter = 0;
 
-// Callback function:
-//  get a variable from HTML and add an event
-//  the event type is "click", when clicked will exute an arrow function
-getSaveButton.addEventListener("click", (event) => {
-  // prevent the default action of the event from happening
-  event.preventDefault();
+export function createItemList() {
   if (getInputData.value === "") {
     alert("Please enter an item.");
     return;
   }
 
   // Create html element li
-  const ListItem = document.createElement("li");
+  const listItem = document.createElement("li");
 
   // Create container with class lista-item-container
   const containerItemList = document.createElement("div");
@@ -54,11 +39,8 @@ getSaveButton.addEventListener("click", (event) => {
   containerItemList.appendChild(inputCheckBox);
   containerItemList.appendChild(itemName);
 
-  // Appending containerItemList to ListItem
-  ListItem.appendChild(containerItemList);
-
-  // Now appending to a real element in HTML
-  shoppingList.appendChild(ListItem);
+  // Appending containerItemList to listItem
+  listItem.appendChild(containerItemList);
 
   // Catch only the day when the action occurred
   const daysOfWeek = new Date().toLocaleDateString("pt-BR", {
@@ -79,25 +61,7 @@ getSaveButton.addEventListener("click", (event) => {
   itemTime.classList.add("texto-data");
   itemTime.innerText = completedDate;
 
-  ListItem.appendChild(itemTime);
+  listItem.appendChild(itemTime);
 
-  verifyEmptyList();
-});
-
-// When you use an queySelector you are gettin data from class
-// for this you need place and . before de class name
-const emptyListMessage = document.querySelector(".message-empty-list");
-
-// Function thats verify if ListItem is empty
-// if are empty add emptyList message
-// if not remove emptyList message
-function verifyEmptyList() {
-  const itemsList = shoppingList.querySelectorAll("li");
-  if (itemsList.length === 0) {
-    emptyListMessage.style.display = "block";
-  } else {
-    emptyListMessage.style.display = "none";
-  }
+  return listItem;
 }
-
-verifyEmptyList();
